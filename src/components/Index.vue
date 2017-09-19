@@ -20,7 +20,7 @@
                       <div v-if="count">
                         <transition-group name="slide-fade" tag="p">
                           <div v-for="thing in things" v-bind:key="thing" class="col s3 input-div">
-                            <img class="hvr-grow" src="/static/img/thing.png" />
+                            <router-link class="hvr-grow" :to="{ name: 'Thing', params: { id: thing._id }}" tag="img" src="/static/img/thing.png"></router-link>
                           </div>
                         </transition-group>
                       </div>
@@ -41,7 +41,7 @@ export default {
     }
   },
   mounted(){
-    this.$http.get(process.env.API_URL)
+    this.$http.get(process.env.API_URL+'/things')
       .then(response => {
         this.count = response.data.length;
         this.things = response.data;
@@ -52,7 +52,7 @@ export default {
   },
   methods: {
     addThing(){
-      this.$http.post(process.env.API_URL)
+      this.$http.post(process.env.API_URL+'/things')
         .then(response => {
           this.things.push(response.data.thing);
           this.count += 1;
@@ -94,5 +94,6 @@ export default {
   .hvr-grow:hover, .hvr-grow:focus, .hvr-grow:active {
     -webkit-transform: scale(1.1);
     transform: scale(1.1);
+    cursor: pointer;
   }
 </style>
