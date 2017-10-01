@@ -1,8 +1,10 @@
 <template>
     <div>
-        <div class="row">
+        <div v-if="load == true" class="black-screen">
+          <loader></loader>
+        </div>
+        <div v-else class="row">
           <form class="col s12" v-on:submit.prevent="saveThing">
-            
             <div class="row">
               <div class="input-field col s6">
                 <i class="material-icons prefix">account_circle</i>
@@ -28,13 +30,19 @@
         </div>
     </div>
 </template>
-<<script>
+<script>
+import Loader from '../loaders/Loader'
+
 export default {
   name: 'ThingForm',
+  components:{
+    'loader': Loader
+  },
   data () {
     return {
       thing: '',
-      func: []
+      func: [],
+      load: ''
     }
   },
   mounted(){
@@ -49,7 +57,21 @@ export default {
   },
   methods: {
     saveThing(){
-      console.log('lol')
+      this.load = true;
+      this.$http.put(process.env.API_URL+'/things/'+this.$route.params.id, {
+        'ip': this.thing.ip,
+        'mac': this.thing.mac,
+        'name': this.thing.name,
+        'type': this.thing.type,
+        'id': this.thing._id
+      })
+        .then(response => {
+          this.load = false;
+          this.$route.go('/thing/'+this.$route.params.id);
+        })
+        .catch((error) => {
+          console.log(error);
+        })
     }
   }
 }

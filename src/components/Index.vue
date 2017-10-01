@@ -3,7 +3,7 @@
       <!-- HEADER BAR -->
       <div class="row header-resume">
         <div class="col s2">
-          <small> Total of inputs </small><br>
+          <small> Total of things </small><br>
           <span> {{count}} </span><br>
         </div>
       </div>

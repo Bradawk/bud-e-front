@@ -5,7 +5,7 @@
     </div>
 </template>
 
-<<script>
+<script>
 import ThingForm from './forms/ThingForm'
 
 export default {
