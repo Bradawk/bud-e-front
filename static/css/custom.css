@@ -40,8 +40,8 @@
 /* MENU */ 
 
 #menu #slide-out{
-	background:  #2A3F54;
-	border-right: 5px solid #26a69a;
+	background:  #2A2A2A;
+	border-right: 5px solid #ab5151;;
 }
 
 #menu #slide-out i{
@@ -91,7 +91,7 @@
 }
 
 .header-resume div span{
-	color: #26a69a;
+	color: #ab5151;;
 	font-size: 1.5em;
 	font-weight: bold;
 }

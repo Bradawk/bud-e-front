@@ -14,7 +14,7 @@
           <div class="row main-content">
                 <div class="col s12">
                       <form v-on:submit.prevent="addThing">     
-                        <button class="btn left waves-effect"><i class="material-icons">add</i></button>
+                        <button class="btn red lighten-2 left waves-effect"><i class="material-icons">add</i></button>
                       </form>
                       <div class="Nfloat"></div>
                       <div v-if="count">
