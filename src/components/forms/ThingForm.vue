@@ -43,7 +43,7 @@ export default {
     }
   },
   mounted(){
-    this.$http.get(process.env.API_URL+'/things/'+this.$route.params.id)
+    this.$http.get(process.env.API_URL+'/'+this.$route.params.id)
         .then(response => {
            this.thing = response.data;
            this.func = response.data.func;
@@ -54,7 +54,7 @@ export default {
   },
   methods: {
     saveThing(){
-      this.$http.put(process.env.API_URL+'/things/'+this.$route.params.id, {
+      this.$http.put(process.env.API_URL+'/'+this.$route.params.id, {
         'ip': this.thing.ip,
         'mac': this.thing.mac,
         'name': this.thing.name,

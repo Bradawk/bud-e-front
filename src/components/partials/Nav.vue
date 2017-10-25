@@ -10,7 +10,6 @@
           </div>
         </div>
         <li><router-link :to="{name: 'Index'}"><i class="material-icons">home</i>Home</router-link></li>
-        <li><router-link :to="{ name: 'Func'}"><i class="material-icons">chrome_reader_mode</i>Functionalities</router-link></li>
       </ul>
     </div>
   </div>

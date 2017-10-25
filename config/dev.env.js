@@ -3,5 +3,6 @@ var prodEnv = require('./prod.env')
 
 module.exports = merge(prodEnv, {
   NODE_ENV: '"development"',
-  API_URL: '"http://localhost:3000"'
+  API_URL: '"http://localhost:3000"',
+  CF_URL: '"https://bud-e.cfapps.io/"'
 })
