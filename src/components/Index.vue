@@ -33,14 +33,23 @@
 </template>
 
 <script>
+import auth from '../auth'
+
 export default {
   name: 'index',
   data() {
     return {
       count: '',
       things: [],
-      error: ''
+      error: '',
+      user: auth.user
     }
+  },
+  beforeMount() {
+    if (!this.user.authenticated) {
+      this.$router.push('/login');
+    }
+    console.log(localStorage.getItem('token'));
   },
   mounted() {
     this.$http.get('https://bud-e.cfapps.io/')
@@ -63,6 +72,9 @@ export default {
         .catch((error) => {
           Materialize.toast(error, '3000');
         })
+    },
+    logout() {
+      auth.logout();
     }
   }
 }
@@ -85,6 +97,13 @@ export default {
   transform: translateX(10px);
   opacity: 0;
 }
+
+
+
+
+
+
+
 
 
 
