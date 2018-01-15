@@ -2,13 +2,11 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Index from '@/components/Index'
 import Thing from '@/components/Thing'
-import AdminPage from '@/components/AdminPage'
 import Signup from '../components/auth/Signup.vue'
 import Login from '../components/auth/Login.vue'
-import auth from '../auth/index'
+import VueRouter from 'vue-router'
 
-
-Vue.use(Router)
+Vue.use(VueRouter)
 
 export default new Router({
   routes: [{
@@ -28,10 +26,6 @@ export default new Router({
     {
       path: '/signup',
       component: Signup
-    },
-    {
-      path: '/admin',
-      component: AdminPage
     },
     {
       path: '*',

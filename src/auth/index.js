@@ -1,6 +1,6 @@
 const API_URL = 'http://localhost:3000'
-const LOGIN_URL = API_URL + '/user/login'
-const SIGNUP_URL = API_URL + '/user/signup'
+const LOGIN_URL = API_URL + '/users/login'
+const SIGNUP_URL = API_URL + '/users/signup'
 export default {
 
   user: {
@@ -26,18 +26,13 @@ export default {
         'password': creds.password
       })
       .then(response => {
-        if (response.data.success == false) {
-          context.$router.push('/login');
-          Materialize.toast(response.data.message, '2000');
-        } else {
           localStorage.setItem('token', response.data.token);
           this.user.authenticated = true;
           context.$router.push(redirect);
           Materialize.toast(response.data.message, '2000');
-        }
       })
       .catch((error) => {
-        console.log(error);
+        Materialize.toast('Try again :)', '2000');
       })
   },
 
@@ -62,8 +57,7 @@ export default {
   logout(context, redirect) {
     localStorage.removeItem('token')
     this.user.authenticated = false
-    context.$router.push(redirect);
-    Materialize.toast('See you soon !', '2000');
+    context.$router.go(redirect);
   },
 
   checkAuth() {
@@ -75,10 +69,9 @@ export default {
     }
   },
 
-
   getAuthHeader() {
     return {
-      'Authorization': 'Bearer ' + localStorage.getItem('token')
+      'x-access-token': localStorage.getItem('token')
     }
   }
 }

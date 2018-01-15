@@ -45,25 +45,20 @@ export default {
       user: auth.user
     }
   },
-  beforeMount() {
-    if (!this.user.authenticated) {
-      this.$router.push('/login');
-    }
-    console.log(localStorage.getItem('token'));
-  },
   mounted() {
-    this.$http.get('https://bud-e.cfapps.io/')
-      .then(response => {
-        this.count = response.data.length;
-        this.things = response.data;
-      })
-      .catch((error) => {
-        console.log(error);
-      })
+    this.$http.get('http://localhost:3000', { headers: {'x-access-token': localStorage.getItem('token')}})
+    .then(response => {
+      this.count = response.data.length;
+      this.things = response.data;
+      console.log(response)
+    })
+    .catch((error) => {
+      this.$router.push('/login')
+    })
   },
   methods: {
     addThing() {
-      this.$http.post('https://bud-e.cfapps.io/')
+      this.$http.post(process.env.API_URL, { headers: auth.getAuthHeader() })
         .then(response => {
           this.things.push(response.data.thing);
           this.count += 1;
@@ -72,9 +67,6 @@ export default {
         .catch((error) => {
           Materialize.toast(error, '3000');
         })
-    },
-    logout() {
-      auth.logout();
     }
   }
 }

@@ -10,11 +10,14 @@
           </div>
         </div>
         <li><router-link :to="{name: 'Index'}"><i class="material-icons">home</i>Home</router-link></li>
+        <li><a v-on:click='logout'><i class="material-icons">power_settings_new</i>Logout</a></li>
       </ul>
     </div>
   </div>
 </template>
 <script>
+import auth from '../../auth'
+
 export default {
   name: 'Nav',
   data () {
@@ -22,5 +25,10 @@ export default {
       funcs: ''
     }
   },
+  methods:{
+    logout(){
+      auth.logout(this, '/login')
+    }
+  }
 }
 </script>

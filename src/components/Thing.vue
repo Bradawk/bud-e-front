@@ -33,6 +33,7 @@
 
 <script>
 import ThingForm from './forms/ThingForm'
+import auth from '../auth'
 
 export default {
   name: 'Thing',
@@ -45,7 +46,7 @@ export default {
     }
   },
   mounted() {
-    this.$http.get('https://bud-e.cfapps.io' + '/' + this.$route.params.id)
+    this.$http.get(process.env.API_URL + '/' + this.$route.params.id, { headers: auth.getAuthHeader() })
       .then(response => {
         this.thing = response.data;
       })
@@ -56,7 +57,7 @@ export default {
   methods: {
     trigger_func(action) {
       this.trigger = action;
-      this.$http.post('https://bud-e.cfapps.io/speech/request', { 'action': this.trigger, 'id': this.$route.params.id })
+      this.$http.post(process.env.API_URL+'/speech/request', { 'action': this.trigger, 'id': this.$route.params.id })
         .then(response => {
           this.$router.go('/thing/' + this.$route.params.id);
         })

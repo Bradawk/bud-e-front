@@ -6,10 +6,13 @@ import router from './router'
 import axios from 'axios'
 import auth from './auth'
 
-Vue.config.productionTip = false
-Vue.prototype.$http = axios;
 
-/* eslint-disable no-new */
+
+Vue.config.productionTip = false;
+Vue.prototype.$http = axios;
+Vue.prototype.$http.defaults.headers.common['x-access-token'] = localStorage.getItem('token');
+auth.checkAuth()
+
 new Vue({
   el: '#app',
   router,

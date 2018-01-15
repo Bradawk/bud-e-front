@@ -1,5 +1,9 @@
 /* CUSTOM */
 
+a{
+  cursor: pointer;
+}
+
 .Nfloat {
   clear: both;
 }
