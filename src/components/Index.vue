@@ -46,7 +46,7 @@ export default {
     }
   },
   mounted() {
-    this.$http.get('http://localhost:3000', { headers: {'x-access-token': localStorage.getItem('token')}})
+    this.$http.get(process.env.API_URL, { headers: {'x-access-token': localStorage.getItem('token')}})
     .then(response => {
       this.count = response.data.length;
       this.things = response.data;
@@ -58,7 +58,7 @@ export default {
   },
   methods: {
     addThing() {
-      this.$http.post(process.env.API_URL, { headers: auth.getAuthHeader() })
+      this.$http.post(process.env.API_URL, { headers: {'x-access-token': localStorage.getItem('token')}})
         .then(response => {
           this.things.push(response.data.thing);
           this.count += 1;
